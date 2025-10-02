@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio de Creadoras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #searchBar {
+      display: block;
+      margin: 0 auto 30px auto;
+      padding: 10px;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .fb-container {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌸 Directorio de Creadoras 🌸</h1>
+  <input type="text" id="searchBar" placeholder="Buscar creadora...">
+
+  <div class="grid" id="cardContainer">
+    <!-- Aquí van las tarjetas generadas -->
+  </div>
+
+  <!-- Script oficial de Facebook -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" 
+    src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0">
+  </script>
+
+  <script>
+    // Lista de creadoras
+    const creadoras = [
+      {nombre: "Dairis Torres", enlace: "https://www.facebook.com/stef.torres.355"},
+      {nombre: "Jonemalist Castellanos", enlace: "https://www.facebook.com/share/1B2KWJkiEu/"},
+      {nombre: "Ian Vianey", enlace: "https://www.facebook.com/share/1CQp8DSKSm/"},
+      {nombre: "Perlita Bonita", enlace: "https://www.facebook.com/share/1CZUP6Gvyu/"},
+      {nombre: "Poly Álvarez", enlace: "https://www.facebook.com/poly.alvarez.3386"},
+      {nombre: "Yvon CL", enlace: "https://www.facebook.com/profile.php?id=61581375710549"},
+      {nombre: "Luu Trigueros", enlace: "https://www.facebook.com/reinaguadalupe.triguerosacevedo.9"},
+      {nombre: "Leydi Osorio", enlace: "https://www.facebook.com/Ley.Yanet"},
+      {nombre: "Luis Angel DC", enlace: "https://www.facebook.com/share/191rRf42rf/"},
+      {nombre: "Conchita Lagunes", enlace: "https://www.facebook.com/conchitha.aquinolagunes"},
+      {nombre: "Alejandra Miriam", enlace: "https://www.facebook.com/share/1Ebihb3DCt/"},
+      {nombre: "Variedad Online", enlace: "https://www.facebook.com/profile.php?id=61576788747984"},
+      {nombre: "PM nails Spa", enlace: "https://www.facebook.com/share/1FHFbJLHfq/"},
+      {nombre: "Detalles y variedades", enlace: "https://www.facebook.com/share/19iJ8siFvi/"},
+      {nombre: "Florencio Alma", enlace: "https://www.facebook.com/share/17NgW6Zi8o/"},
+      {nombre: "Luisa Alvarez", enlace: "https://www.facebook.com/share/1BMqJccqLj/"},
+      {nombre: "Lupita Manriquez", enlace: "https://www.facebook.com/share/17C5EehNy5/"},
+      {nombre: "Laura Olmos", enlace: "https://www.facebook.com/share/19kYDbFvJ9/"},
+      {nombre: "Carolina Sánchez Chaparro", enlace: "https://www.facebook.com/share/1WDRkJTVPE/"},
+      {nombre: "Rodriguez Carolina", enlace: "https://www.facebook.com/rodriguez.carolinaa.2025"},
+      {nombre: "Xitlali", enlace: "https://www.facebook.com/share/v/1YoAwUgPd3/"},
+      {nombre: "Tania Huerta", enlace: "https://www.facebook.com/share/1CbByD1mat/"},
+      {nombre: "Sarahi Curiel", enlace: "https://www.facebook.com/share/16JRuv22TJ/"},
+      {nombre: "Mili Murillo", enlace: "https://www.facebook.com/share/175hmtKECB/"},
+      {nombre: "Mar solis", enlace: "https://www.facebook.com/share/1ChCR4LhX1/"},
+      {nombre: "Liz Meba", enlace: "https://www.facebook.com/lizbeth.mendobautista"},
+      {nombre: "Herrera Alarcón", enlace: "https://www.facebook.com/share/1CTvDvukgn/"},
+      {nombre: "Chela López", enlace: "https://www.facebook.com/chela.lopez.662035"},
+      {nombre: "Maricarmen hernandez", enlace: "https://www.facebook.com/share/1EmneQAogK/"},
+      {nombre: "Ross Guzmán", enlace: "https://www.facebook.com/rosa.gusman.908"},
+      {nombre: "Pao Gar", enlace: "https://www.facebook.com/share/12CdubnDCXz/"},
+      {nombre: "Gallegos EG", enlace: "https://www.facebook.com/share/1Ce9EcMfy4/"},
+      {nombre: "FerLu", enlace: "https://www.facebook.com/share/16uVdEUrAa/"},
+      {nombre: "Carmen Cevallos", enlace: "https://www.facebook.com/share/1BBLGhYFY7/"},
+      {nombre: "Marisol Ceballos", enlace: "https://www.facebook.com/share/1JnEcq4NyB/"},
+      {nombre: "Gonzales Jenny", enlace: "https://www.facebook.com/Jenng25.591629"},
+      {nombre: "Luz Gutuerrez", enlace: "https://www.facebook.com/share/1GiGuDYrFF/"},
+      {nombre: "Yami Brito", enlace: "https://www.facebook.com/share/1CnmjbZZ4T/"},
+      {nombre: "Melvis", enlace: "https://www.facebook.com/share/1A2fHYe9zN/"},
+      {nombre: "Carlos Quiroz", enlace: "https://www.facebook.com/quirozbucio"},
+      {nombre: "Ocampo Dianita", enlace: "https://www.facebook.com/share/1BHChxdbeW/"},
+      {nombre: "Chantal Acevedo", enlace: "https://www.facebook.com/chantal.acevedo.7543"},
+      {nombre: "Esmeralda FG", enlace: "https://www.facebook.com/share/1GwXQeJf3c/"},
+      {nombre: "Patty Villa", enlace: "https://www.facebook.com/share/1GQg2fs9ny/"},
+      {nombre: "Itzel Benitez", enlace: "https://www.facebook.com/share/1A3CQzVk7z/"},
+      {nombre: "Iracema", enlace: "https://www.facebook.com/share/p/17GXqh4z9i/"},
+      {nombre: "Mariela", enlace: "https://www.facebook.com/share/1F4dsnweWL/"},
+      {nombre: "Daflove Sweet", enlace: "https://www.facebook.com/share/1CMWzL5QHK/"},
+      {nombre: "Ana Alo", enlace: "https://www.facebook.com/share/1FfBp9NcyR/"},
+      {nombre: "Mar Arjoneana", enlace: "https://www.facebook.com/100064003513700/posts/1246137397529699/"},
+    ];
+
+    const container = document.getElementById("cardContainer");
+
+    // Generar tarjetas
+    creadoras.forEach(c => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="https://graph.facebook.com/${c.enlace.split('/')[3]}/picture?type=large" alt="${c.nombre}">
+        <h2>${c.nombre}</h2>
+        <div class="fb-container">
+          <div class="fb-page" 
+            data-href="${c.enlace}" 
+            data-tabs="timeline" 
+            data-width="340" 
+            data-height="500" 
+            data-small-header="false" 
+            data-adapt-container-width="true" 
+            data-hide-cover="false" 
+            data-show-facepile="false"></div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Buscador
+    const searchBar = document.getElementById("searchBar");
+    searchBar.addEventListener("keyup", () => {
+      const filter = searchBar.value.toLowerCase();
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => {
+        const name = card.querySelector("h2").textContent.toLowerCase();
+        card.style.display = name.includes(filter) ? "block" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>
