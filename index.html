@@ -130,7 +130,8 @@
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <img src="https://cdn-icons-png.flaticon.com/512/346/346167.png</h2>
+        <img src="https://graph.facebook.com/${c.enlace.split('/')[3]}/picture?type=large" alt="${c.nombre}">
+        <h2>${c.nombre}</h2>
         <div class="fb-container">
           <div class="fb-page" 
             data-href="${c.enlace}" 
