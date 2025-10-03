@@ -38,147 +38,149 @@
       text-align: center;
       transition: transform 0.2s;
     }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
-    .card h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { font-size: 18px; margin-bottom: 10px; }
     .btn {
       padding: 8px 12px;
-      border: none;
-      border-radius: 6px;
+      border: none; border-radius: 6px;
       background-color: #1877f2;
       color: #fff;
       cursor: pointer;
       font-size: 14px;
     }
-    .btn:hover {
-      background-color: #145dbf;
-    }
+    .btn:hover { background-color: #145dbf; }
 
     /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      text-align: center;
-      position: relative;
-    }
-    .close {
-      position: absolute;
-      top: 10px; right: 15px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-    }
+    .modal { display: none; position: fixed; z-index:1000; left:0; top:0;
+             width:100%; height:100%; overflow:auto; background-color: rgba(0,0,0,0.6);}
+    .modal-content { background:#fff; margin:50px auto; padding:20px; border-radius:12px;
+                     max-width:500px; text-align:center; position:relative; }
+    .close { position:absolute; top:10px; right:15px; font-size:24px; font-weight:bold;
+             color:#333; cursor:pointer; }
   </style>
 </head>
 <body>
 
-  <h1>🌸 Directorio de Creadoras 🌸</h1>
-  <input type="text" id="searchBar" placeholder="Buscar creadora...">
+<h1>🌸 Directorio de Creadoras 🌸</h1>
+<input type="text" id="searchBar" placeholder="Buscar creadora...">
 
-  <div class="grid" id="cardContainer">
-    <!-- Tarjetas generadas por JS -->
+<div class="grid" id="cardContainer"></div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="fbPostContainer"></div>
   </div>
+</div>
 
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="fbPostContainer"></div>
-    </div>
-  </div>
+<!-- Script oficial de Facebook -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+  src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0"></script>
 
-  <!-- Script oficial de Facebook -->
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" 
-    src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0">
-  </script>
+<script>
+  const creadoras = [
+    {nombre: "Dairis Torres", enlace: "https://www.facebook.com/stef.torres.355"},
+    {nombre: "Jonemalist Castellanos", enlace: "https://www.facebook.com/share/1B2KWJkiEu/"},
+    {nombre: "Ian Vianey", enlace: "https://www.facebook.com/share/1CQp8DSKSm/"},
+    {nombre: "Perlita Bonita", enlace: "https://www.facebook.com/share/1CZUP6Gvyu/"},
+    {nombre: "Poly Álvarez", enlace: "https://www.facebook.com/poly.alvarez.3386"},
+    {nombre: "Yvon CL", enlace: "https://www.facebook.com/profile.php?id=61581375710549"},
+    {nombre: "Luu Trigueros", enlace: "https://www.facebook.com/reinaguadalupe.triguerosacevedo.9"},
+    {nombre: "Leydi Osorio", enlace: "https://www.facebook.com/Ley.Yanet"},
+    {nombre: "Luis Angel DC", enlace: "https://www.facebook.com/share/191rRf42rf/"},
+    {nombre: "Conchita Lagunes", enlace: "https://www.facebook.com/conchitha.aquinolagunes"},
+    {nombre: "Alejandra Miriam", enlace: "https://www.facebook.com/share/1Ebihb3DCt/"},
+    {nombre: "Variedad Online", enlace: "https://www.facebook.com/profile.php?id=61576788747984"},
+    {nombre: "PM nails Spa", enlace: "https://www.facebook.com/share/1FHFbJLHfq/"},
+    {nombre: "Detalles y variedades", enlace: "https://www.facebook.com/share/19iJ8siFvi/"},
+    {nombre: "Florencio Alma", enlace: "https://www.facebook.com/share/17NgW6Zi8o/"},
+    {nombre: "Luisa Alvarez", enlace: "https://www.facebook.com/share/1BMqJccqLj/"},
+    {nombre: "Lupita Manriquez", enlace: "https://www.facebook.com/share/17C5EehNy5/"},
+    {nombre: "Laura Olmos", enlace: "https://www.facebook.com/share/19kYDbFvJ9/"},
+    {nombre: "Carolina Sánchez Chaparro", enlace: "https://www.facebook.com/share/1WDRkJTVPE/"},
+    {nombre: "Rodriguez Carolina", enlace: "https://www.facebook.com/rodriguez.carolinaa.2025"},
+    {nombre: "Xitlali", enlace: "https://www.facebook.com/share/v/1YoAwUgPd3/"},
+    {nombre: "Tania Huerta", enlace: "https://www.facebook.com/share/1CbByD1mat/"},
+    {nombre: "Sarahi Curiel", enlace: "https://www.facebook.com/share/16JRuv22TJ/"},
+    {nombre: "Mili Murillo", enlace: "https://www.facebook.com/share/175hmtKECB/"},
+    {nombre: "Mar solis", enlace: "https://www.facebook.com/share/1ChCR4LhX1/"},
+    {nombre: "Liz Meba", enlace: "https://www.facebook.com/lizbeth.mendobautista"},
+    {nombre: "Herrera Alarcón", enlace: "https://www.facebook.com/share/1CTvDvukgn/"},
+    {nombre: "Chela López", enlace: "https://www.facebook.com/chela.lopez.662035"},
+    {nombre: "Maricarmen hernandez", enlace: "https://www.facebook.com/share/1EmneQAogK/"},
+    {nombre: "Ross Guzmán", enlace: "https://www.facebook.com/rosa.gusman.908"},
+    {nombre: "Pao Gar", enlace: "https://www.facebook.com/share/12CdubnDCXz/"},
+    {nombre: "Gallegos EG", enlace: "https://www.facebook.com/share/1Ce9EcMfy4/"},
+    {nombre: "FerLu", enlace: "https://www.facebook.com/share/16uVdEUrAa/"},
+    {nombre: "Carmen Cevallos", enlace: "https://www.facebook.com/share/1BBLGhYFY7/"},
+    {nombre: "Marisol Ceballos", enlace: "https://www.facebook.com/share/1JnEcq4NyB/"},
+    {nombre: "Gonzales Jenny", enlace: "https://www.facebook.com/Jenng25.591629"},
+    {nombre: "Luz Gutuerrez", enlace: "https://www.facebook.com/share/1GiGuDYrFF/"},
+    {nombre: "Yami Brito", enlace: "https://www.facebook.com/share/1CnmjbZZ4T/"},
+    {nombre: "Melvis", enlace: "https://www.facebook.com/share/1A2fHYe9zN/"},
+    {nombre: "Carlos Quiroz", enlace: "https://www.facebook.com/quirozbucio"},
+    {nombre: "Ocampo Dianita", enlace: "https://www.facebook.com/share/1BHChxdbeW/"},
+    {nombre: "Chantal Acevedo", enlace: "https://www.facebook.com/chantal.acevedo.7543"},
+    {nombre: "Esmeralda FG", enlace: "https://www.facebook.com/share/1GwXQeJf3c/"},
+    {nombre: "Patty Villa", enlace: "https://www.facebook.com/share/1GQg2fs9ny/"},
+    {nombre: "Itzel Benitez", enlace: "https://www.facebook.com/share/1A3CQzVk7z/"},
+    {nombre: "Iracema", enlace: "https://www.facebook.com/share/p/17GXqh4z9i/"},
+    {nombre: "Mariela", enlace: "https://www.facebook.com/share/1F4dsnweWL/"},
+    {nombre: "Daflove Sweet", enlace: "https://www.facebook.com/share/1CMWzL5QHK/"},
+    {nombre: "Ana Alo", enlace: "https://www.facebook.com/share/1FfBp9NcyR/"},
+    {nombre: "Mar Arjoneana", enlace: "https://www.facebook.com/100064003513700/posts/1246137397529699/"},
+  ];
 
-  <script>
-    const creadoras = [
-      {nombre: "Dairis Torres", enlace: "https://www.facebook.com/stef.torres.355"},
-      {nombre: "Jonemalist Castellanos", enlace: "https://www.facebook.com/share/1B2KWJkiEu/"},
-      {nombre: "Ian Vianey", enlace: "https://www.facebook.com/share/1CQp8DSKSm/"},
-      {nombre: "Perlita Bonita", enlace: "https://www.facebook.com/share/1CZUP6Gvyu/"},
-      {nombre: "Poly Álvarez", enlace: "https://www.facebook.com/poly.alvarez.3386"},
-      {nombre: "Yvon CL", enlace: "https://www.facebook.com/profile.php?id=61581375710549"},
-      {nombre: "Luu Trigueros", enlace: "https://www.facebook.com/reinaguadalupe.triguerosacevedo.9"},
-      {nombre: "Leydi Osorio", enlace: "https://www.facebook.com/Ley.Yanet"},
-      // ... Agrega todas las demás de la lista aquí
-    ];
+  const container = document.getElementById("cardContainer");
 
-    const container = document.getElementById("cardContainer");
+  // Crear tarjetas sin fotos
+  creadoras.forEach(c => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h2>${c.nombre}</h2>
+      <button class="btn" onclick="openModal('${c.enlace}')">Ver publicaciones</button>
+    `;
+    container.appendChild(card);
+  });
 
-    // Crear tarjetas
-    creadoras.forEach(c => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="https://graph.facebook.com/${c.enlace.split('/')[3]}/picture?type=large" alt="${c.nombre}">
-        <h2>${c.nombre}</h2>
-        <button class="btn" onclick="openModal('${c.enlace}')">Ver publicaciones</button>
-      `;
-      container.appendChild(card);
+  // Buscador
+  const searchBar = document.getElementById("searchBar");
+  searchBar.addEventListener("keyup", () => {
+    const filter = searchBar.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      const name = card.querySelector("h2").textContent.toLowerCase();
+      card.style.display = name.includes(filter) ? "block" : "none";
     });
+  });
 
-    // Buscador
-    const searchBar = document.getElementById("searchBar");
-    searchBar.addEventListener("keyup", () => {
-      const filter = searchBar.value.toLowerCase();
-      const cards = document.querySelectorAll(".card");
-      cards.forEach(card => {
-        const name = card.querySelector("h2").textContent.toLowerCase();
-        card.style.display = name.includes(filter) ? "block" : "none";
-      });
-    });
+  // Modal
+  const modal = document.getElementById("modal");
+  const fbPostContainer = document.getElementById("fbPostContainer");
+  const closeBtn = document.querySelector(".close");
 
-    // Modal
-    const modal = document.getElementById("modal");
-    const fbPostContainer = document.getElementById("fbPostContainer");
-    const closeBtn = document.querySelector(".close");
+  function openModal(url) {
+    fbPostContainer.innerHTML = `
+      <div class="fb-page" 
+        data-href="${url}" 
+        data-tabs="timeline" 
+        data-width="400" 
+        data-height="500" 
+        data-small-header="false" 
+        data-adapt-container-width="true" 
+        data-hide-cover="false" 
+        data-show-facepile="false">
+      </div>`;
+    modal.style.display = "block";
+    if (FB) FB.XFBML.parse(fbPostContainer);
+  }
 
-    function openModal(url) {
-      fbPostContainer.innerHTML = `
-        <div class="fb-page" 
-          data-href="${url}" 
-          data-tabs="timeline" 
-          data-width="400" 
-          data-height="500" 
-          data-small-header="false" 
-          data-adapt-container-width="true" 
-          data-hide-cover="false" 
-          data-show-facepile="false">
-        </div>`;
-      modal.style.display = "block";
-      if (FB) FB.XFBML.parse(fbPostContainer);
-    }
-
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; }
-  </script>
+  closeBtn.onclick = () => modal.style.display = "none";
+  window.onclick = e => { if (e.target === modal) modal.style.display = "none"; }
+</script>
 
 </body>
 </html>
